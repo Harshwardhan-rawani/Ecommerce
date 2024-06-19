@@ -7,7 +7,7 @@ routes.post("/",async(req,res)=>{
   try {
     const {email , pass} = req.body
     const data = await user.findOne({email})
-   
+    const Matchpass = bcrypt.compare(data.pass,pass)
     if(data){
     const token = jwt.sign({ id: data._id }, process.env.Jwt_token, {
         expiresIn: '1h'
