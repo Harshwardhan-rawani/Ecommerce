@@ -116,8 +116,8 @@ useEffect(() => {
       <div className='bg-gray-200 relative hover:text-black hover:bg-gray-300'>
         <img  src={`${e.thumbnail}`} alt="" />
         <div className='p-2 '>
-        <p className='italic mb-2'>{e.title}</p>
-          <p className='flex items-center font-medium'><FaRupeeSign/>{Math.ceil((80*e.price)-(Math.ceil(80*e.price*e.discountPercentage*0.01)))} </p>
+        <p className='font-thin mb-2'>{e.title}</p>
+          <p className='flex items-center font-semibold'><FaRupeeSign/>{Math.ceil((80*e.price)-(Math.ceil(80*e.price*e.discountPercentage*0.01)))} </p>
 
         </div>
      </div>
