@@ -52,7 +52,6 @@ useEffect(() => {
         }
       });
       setheart(res.data)
-      setLoading(true)
     } catch (error) {
       console.error('Error posting data:', error);
     }
