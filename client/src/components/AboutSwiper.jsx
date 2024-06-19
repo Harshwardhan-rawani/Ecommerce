@@ -57,7 +57,7 @@ useEffect(() => {
   return (
     <div className='z-10 w-90%  flex items-center justify-center flex-col'>
       <Swiper breakpoints={{
-        340 : {slidesPerView:3,
+        340 : {slidesPerView:2,
                spaceBetween : 6
         },
         700 : {slidesPerView:3,
