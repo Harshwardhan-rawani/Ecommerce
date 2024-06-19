@@ -3,11 +3,10 @@ const routes =express.Router()
 const bcrypt = require('bcryptjs');
 const user = require("../model/signup")
 const jwt = require('jsonwebtoken');
-routes.post("/",async(req,res)=>{3
+routes.post("/",async(req,res)=>{
   try {
     const {email , pass} = req.body
     const data = await user.findOne({email})
-    console.log(data)
     const Matchpass= await bcrypt.compare(pass,data.pass)
     if(Matchpass){
       if(data){
