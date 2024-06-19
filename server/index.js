@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require("express")
 const app = express();
 const cors = require('cors')
-const port = 5000
+const port = process.env.PORT || 8000
 const path = require("path")
 //connection
 const { createConnection }  = require("./connection")
@@ -25,7 +25,7 @@ const corsOptions = {
     credentials : true
 }
 //connection
-createConnection("mongodb+srv://harshwardhanrawani:PLlYvgSehDk14FMR@cluster0.pvhqo9k.mongodb.net/e_com?retryWrites=true&w=majority&appName=Cluster0/E-commerce")
+createConnection(process.env.MONOGODB)
 .then(()=>{console.log("mongodb connected")}).catch(()=>{console.log("error")});
 
 app.use(express.urlencoded({extended:false}))
