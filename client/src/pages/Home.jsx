@@ -25,19 +25,19 @@ useEffect(()=>{
     <Items/>
    <Carousel1/>
    <br />
-   <h1 className='w-[87%] m-auto '>Laptops</h1>
+   <h1 className='w-[87%] m-auto text-xl'>Laptops</h1>
    <AboutSwiper Image={slide1}/>
    <br />
-   <h1 className='w-[87%] m-auto '>Top Watches</h1>
+   <h1 className='w-[87%] m-auto text-xl '>Top Watches</h1>
    <AboutSwiper Image={slide2}/>
    <br />
-   <h1 className='w-[87%] m-auto '>Shoes</h1>
+   <h1 className='w-[87%] m-auto text-xl '>Shoes</h1>
    <AboutSwiper Image={slide3}/>
    <br />
-   <h1 className='w-[87%] m-auto '>Mens</h1>
+   <h1 className='w-[87%] m-auto text-xl '>Mens</h1>
    <AboutSwiper Image={slide4}/>
    <br />
-   <h1 className='w-[87%] m-auto '>Women's</h1>
+   <h1 className='w-[87%] m-auto text-xl '>Women's</h1>
    <AboutSwiper Image={slide5}/>
     </>
   )
