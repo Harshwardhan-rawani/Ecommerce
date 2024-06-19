@@ -20,7 +20,7 @@ const homeitems = require("./model/Homeitems.js")
 const cart = require("./model/cartpost.js")
 
 const corsOptions = {
-    origin : "http://localhost:5173"
+    origin : "https://ecommerce-coral-five-60.vercel.app/"
     ,methods : "GET, POST, PUT, DELETE , PATCH , HEAD",
     credentials : true
 }

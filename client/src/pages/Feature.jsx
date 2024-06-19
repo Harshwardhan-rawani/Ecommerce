@@ -79,9 +79,7 @@ useEffect(() => {
       getProduct();
     }, [id]);
    
-    if (loading){ 
-        return <div>Loading...</div>;}
-    if (error) return <div>{error}</div>;
+ 
 
     const send_to_cart = async()=>{
       if(user){
@@ -110,6 +108,10 @@ useEffect(() => {
     navigate("/login")
     }
     }
+
+    if (loading){ 
+      return <div>Loading...</div>;}
+  if (error) return <div>{error}</div>;
   return (
    <div className=' mt-[8vh] ml-5 h-[40vw] grid grid-cols-1 gap-4 lg:grid lg:grid-cols-2 lg:gap-2 lg:m-20'>
     {/* left */}
