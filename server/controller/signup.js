@@ -21,7 +21,7 @@ return res.status(200).json({message:"Successfully Register",token})
 return res.status(404).json({message:"This User Already exist"})
  }
  catch(error){
-  console.log(error)
+  return res.status(404).json({message:"Enter again "})
  }
 }
 const postForgot = async(req,res)=>{

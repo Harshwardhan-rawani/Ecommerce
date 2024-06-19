@@ -96,7 +96,7 @@ useEffect(() => {
           'Content-Type': 'multipart/form-data'
         }
        })
-       toast.success(response.data.message)
+    
      }
      catch(error){
       console.error('Error uploading :', error);
