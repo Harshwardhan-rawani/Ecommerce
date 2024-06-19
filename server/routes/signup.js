@@ -1,7 +1,8 @@
 const express = require("express");
 const routes = express.Router();
-const { postsignup } = require("../controller/signup");
+const { postsignup,postForgot } = require("../controller/signup");
 
-routes.post("/",postsignup)
+routes.post("/signup",postsignup)
+routes.put("/forgot",postForgot)
 
 module.exports = routes

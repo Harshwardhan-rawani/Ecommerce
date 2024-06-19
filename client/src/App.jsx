@@ -17,8 +17,8 @@ import Product from './pages/Product';
 import { Authcontext } from './context/Auth';
 import { useContext } from 'react';
 import Likedlist from './pages/Likedlist';
+import Forgot from './pages/Forgot';
 function App() {
-  const {storetoken,token,deletetoken}=useContext(Authcontext)
 
   return (
     <>
@@ -31,6 +31,7 @@ function App() {
           <Route   path="*" element= {<><Error/></>} />
           <Route   path="/admin" element= {<><Admin/></>} />
           <Route   path="/signup" element= {<><Top/><Signup/></>} />
+          <Route   path="/forgot" element= {<><Top/><Forgot/></>} />
           <Route   path="/profile" element= {<><Top/><Profile /></>} />
           <Route   path="/admin/homeitems" element= {<><AdminTop/><MenuAdmin/><Homeitem/></>} />
           <Route   path="/feature/:id" element= {<><Top/><Feature/></>} />

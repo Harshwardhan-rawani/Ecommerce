@@ -29,7 +29,7 @@ app.use(express.json())
 app.use(cors())
 app.use(express.static(path.join(__dirname)))
 
-app.use("/signup",Signuproute_router)
+app.use("/",Signuproute_router)
 app.use("/login",Login_router)
 app.use("/profile",Profile_router)
 app.use("/item",homedata_router)

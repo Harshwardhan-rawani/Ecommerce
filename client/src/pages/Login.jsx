@@ -99,7 +99,7 @@ function Login() {
     />
   </div>
  
- <Link to={"/forgotpass"}><div className='underline mb-2 text-end'>Forgot password</div></Link> 
+ <Link to={"/forgot"}><div className='underline mb-2 text-end'>Forgot password</div></Link> 
   <div className='mb-5'>
     <p>Not register <Link to={"/signup"}><span className='text-blue-600 font-semibold'>Sign up</span></Link></p>
   </div>
