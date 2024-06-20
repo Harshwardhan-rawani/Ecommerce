@@ -6,11 +6,12 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { Authcontext } from '../context/Auth';
 import axios from 'axios';
 
+
 function Likedlist() {
-  const {token} = useContext(Authcontext)
   const [heart,setheart]=useState([])
+  const {storetoken,token}=useContext(Authcontext)
   const [loading,setLoading]=useState(true)
-    useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       try {
         const res = await axios.get(`${import.meta.env.VITE_URL}/wishlist`, {
@@ -38,11 +39,14 @@ function Likedlist() {
       })
   }
   if (loading) {
-    return  <div className='w-screen h-screen flex items-center justify-center'><div className="w-16 h-16 spinner-border" role="status">
-    <span class="visually-hidden">Loading...</span>
-    </div></div>
-    
-      }
+    return (
+      <div className='w-screen h-screen flex items-center justify-center'>
+        <div className="w-16 h-16 spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
   
   return (
     <>

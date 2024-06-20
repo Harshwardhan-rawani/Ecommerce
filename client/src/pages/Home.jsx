@@ -6,7 +6,7 @@ import AboutSwiper from '../components/AboutSwiper'
 import { Mycontext } from '../context/Mycontext'
 
 function Home() {
-  const data = useContext(Mycontext)
+  const {data} = useContext(Mycontext)
   const [slide1,setSlide1]=useState([])
   const [slide2,setSlide2]=useState([])
   const [slide3,setSlide3]=useState([])
@@ -22,8 +22,10 @@ useEffect(()=>{
 })
   return (
     <>
-    <Items/>
-   <Carousel1/>
+    <div><Items/></div>
+    <div> <Carousel1/></div>
+ 
+  
    <br />
    <h1 className='w-[87%] m-auto text-xl overline'>Laptops</h1>
    <AboutSwiper Image={slide1}/>

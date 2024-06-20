@@ -1,35 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useContext} from 'react';
+
 import { Link } from 'react-router-dom';
+import { Mycontext } from '../context/Mycontext';
 
 function Items() {
 
-  const [item, setItem] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(`${import.meta.env.VITE_URL}/item/api`);
-        setItem(res.data);
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('Error fetching data');
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  if (loading) return <div>...loading</div>;
-  if (error) return <div>{error}</div>
+ const {data,item}=useContext(Mycontext)
   return (
 
-    <div className='bg-[#ffffff] flex justify-around mt-[40px] p-2 overflow-scroll lg:overflow-hidden lg:mt-[25px] lg:flex lg:justify-center '>
+    <div className='bg-[#ffffff] flex justify-around mt-[30px] p-2 overflow-scroll lg:overflow-hidden lg:mt-[25px] lg:flex lg:justify-center '>
   { item.map((r,index)=>{
   return<Link to={`/product/${r.filename}`} className='mx-3' key={index}> <div>
         

@@ -14,7 +14,7 @@ function Carousel1() {
 
   if(!pro) return <div>..loading</div>
   return (
-    <div className="z-10 h-56 sm:h-64 xl:h-90 2xl:h-96 lg:mt-[-56px]">
+    <div className="z-10 h-56 sm:h-64 xl:h-90  xl:mt-[-20px]">
     <Carousel onSlideChange={(index) => console.log('onSlideChange()', index)}>
     
       {pro.map((e,index)=>{

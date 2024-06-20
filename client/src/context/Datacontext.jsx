@@ -5,6 +5,7 @@ export const DataContext = createContext()
 
 export const Dataprovider = ({children})=>{
    const [user,setUser]=useState(null)
+   const [heart,setheart]=useState([])
     const {storetoken,token}=useContext(Authcontext)   
     useEffect(()=>{
         const fetchData = async () => {
