@@ -76,7 +76,7 @@ useEffect(() => {
       className='w-[90%]'
       >
         {props.Image.map((e)=>{
-               return   <SwiperSlide key={e.id} className=' m-1 bg-gray-200 shadow-md hover:border-2 border-gray-400  h-[22vh] relative lg:h-[22vw]'>
+               return   <SwiperSlide key={e.id} className=' m-1 bg-gray-200 shadow-md hover:border-2 border-gray-400  h-[30vh] relative lg:h-[22vw]'>
               
                 <Link to={`/feature/${e.id}`} className='hover:text-black w-full'>
                 <img src={`${e.thumbnail}`} className='w-full' alt="" />
