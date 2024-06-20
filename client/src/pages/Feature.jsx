@@ -108,8 +108,12 @@ useEffect(() => {
     }
     }
 
-    if (loading){ 
-      return <div>Loading...</div>;}
+    if (loading) {
+      return  <div className='w-screen h-screen flex items-center justify-center'><div className="w-16 h-16 spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+      </div></div>
+      
+        }
   if (error) return <div>{error}</div>;
   return (
    <div className=' mt-[8vh] ml-5 h-[40vw] grid grid-cols-1 gap-4 lg:grid lg:grid-cols-2 lg:gap-2 lg:m-20'>

@@ -9,6 +9,7 @@ import axios from 'axios';
 function Likedlist() {
   const {token} = useContext(Authcontext)
   const [heart,setheart]=useState([])
+  const [loading,setLoading]=useState(true)
     useEffect(() => {
     const getData = async () => {
       try {
@@ -21,7 +22,9 @@ function Likedlist() {
       } catch (error) {
         console.error('Error posting data:', error);
       }
-    
+     finally{
+      setLoading(false)
+     }
     };
   
     getData();
@@ -34,6 +37,13 @@ function Likedlist() {
         }
       })
   }
+  if (loading) {
+    return  <div className='w-screen h-screen flex items-center justify-center'><div className="w-16 h-16 spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+    </div></div>
+    
+      }
+  
   return (
     <>
     <div className='w-100 relative xl:mt-10 lg:mt-12 mt-14'>

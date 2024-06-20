@@ -92,7 +92,13 @@ useEffect(() => {
   getData();
 }, []);
 // console.log(heart.find(item =>item.p_id == 187))
-   if(loading) return <div>..loading</div>
+if (loading) {
+  return  <div className='w-screen h-screen flex items-center justify-center'><div className="w-16 h-16 spinner-border" role="status">
+  <span class="visually-hidden">Loading...</span>
+  </div></div>
+  
+    }
+
    
   return (
  <>

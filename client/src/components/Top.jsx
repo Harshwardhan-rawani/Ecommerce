@@ -48,7 +48,7 @@ useEffect(() => {
     <> 
     <div className='relative top-0'>
     <nav className='fixed z-50 bg-gray-800 w-full lg:fixed lg:z-50 lg:w-screen lg:flex lg:items-center lg:justify-between lg:px-16 lg:py-2'>
-        <div className='text-md text-start m-2 font-bold text-white '>UB Kart</div>
+        <Link to={"/"} className='text-md hover:text-white text-start m-2 font-bold text-white '>UB Kart</Link>
         <form className='mt-2' onSubmit={handlesubmit}>
           <div className='flex justify-center w-full'>
             <input 
