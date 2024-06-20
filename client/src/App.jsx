@@ -15,7 +15,7 @@ import Feature from './pages/Feature';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
 import Likedlist from './pages/Likedlist';
-
+import Forgot from './pages/Forgot'
 function App() {
 
   return (
