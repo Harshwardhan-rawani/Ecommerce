@@ -51,7 +51,7 @@ useEffect(() => {
           Authorization: `Bearer ${token}`
         }
       });
-      setheart(res.data)
+      setheart(res.data[0].products)
     } catch (error) {
       console.error('Error posting data:', error);
     }
@@ -84,7 +84,6 @@ useEffect(() => {
       if(user){
      try{
       const formData = new FormData();
-      formData.append("user_id",user._id)
       formData.append("product_id",data.id)
       formData.append("quantity","1")
       formData.append("price",Math.round((data.price*80)-((data.price*80)*data.discountPercentage*0.01)))
@@ -93,6 +92,7 @@ useEffect(() => {
       setadd("Go to cart")
       const response= await axios.post(`${import.meta.env.VITE_URL}/cart`, formData ,{
         headers: {
+          Authorization : `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
         }
        })

@@ -5,6 +5,7 @@ const cart = new mongoose.Schema({
         type : String,
          required : true
     },
+   products:[{
     product_id : {
         type : String,
          required : true
@@ -25,6 +26,7 @@ const cart = new mongoose.Schema({
         type : String,
          required : true
     },
+   }]
     
 
 

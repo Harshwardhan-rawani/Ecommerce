@@ -19,7 +19,7 @@ function Likedlist() {
             Authorization: `Bearer ${token}`
           }
         });
-        setheart(res.data)
+        setheart(res.data[0].products)
       } catch (error) {
         console.error('Error posting data:', error);
       }

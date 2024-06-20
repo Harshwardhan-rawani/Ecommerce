@@ -22,7 +22,8 @@ function Cart() {
             Authorization: `Bearer ${token}`
           }
         });
-        setData(res.data);
+        
+        setData(res.data[0].products);
         setLoading(false);
       } catch (error) {
         setLoading(false);

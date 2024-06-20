@@ -79,7 +79,7 @@ useEffect(() => {
           Authorization: `Bearer ${token}`
         }
       });
-      setheart(res.data)
+      setheart(res.data[0].products)
       setLoading(true)
     } catch (error) {
       console.error('Error posting data:', error);

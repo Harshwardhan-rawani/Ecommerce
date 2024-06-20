@@ -24,38 +24,26 @@ const ProductProvider = ({ children }) => {
       try {
         const [
           allProducts,
-          menProducts,
-          shoesProducts,
-          womenProducts,
-          earphoneProducts,
-          watchProducts,
-          laptopProducts,
           itemData
         ] = await Promise.all([
-          axios.get("https://dummyjson.com/products"),
-          axios.get("https://dummyjson.com/products/search?q=men"),
-          axios.get("https://dummyjson.com/products/search?q=shoes"),
-          axios.get("https://dummyjson.com/products/search?q=women"),
-          axios.get("https://dummyjson.com/products/search?q=earphone"),
-          axios.get("https://dummyjson.com/products/search?q=watch"),
-          axios.get("https://dummyjson.com/products/search?q=laptop"),
+          axios.get("https://dummyjson.com/products?limit=0"),
           axios.get(`${import.meta.env.VITE_URL}/item/api`)
         ]);
 
         const allData = allProducts.data.products;
-
-        setData({
+           setData({
           alldata: allData,
-          mendata: menProducts.data.products,
-          womendata: womenProducts.data.products,
-          shoesdata: shoesProducts.data.products,
-          watchdata: watchProducts.data.products,
-          earphonedata: earphoneProducts.data.products,
-          laptopdata: laptopProducts.data.products,
+          mendata: allData.slice(70,80),
+          womendata: allData.slice(91,100),
+          shoesdata: allData.slice(81,90),
+          watchdata: allData.slice(101,110),
+          earphonedata: allData.slice(111,120),
+          laptopdata: allData.slice(78,82),
           ubkart: allData.slice(0, 9),
           bestselling: allData.slice(10, 19),
           topdeal: allData.slice(20, 29),
         });
+
 
         setItem(itemData.data);
         setLoading(false);
