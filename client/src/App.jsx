@@ -14,10 +14,8 @@ import Error from "./components/Error"
 import Feature from './pages/Feature';
 import Cart from './pages/Cart';
 import Product from './pages/Product';
-import { Authcontext } from './context/Auth';
-import { useContext } from 'react';
 import Likedlist from './pages/Likedlist';
-import Forgot from './pages/Forgot';
+
 function App() {
 
   return (

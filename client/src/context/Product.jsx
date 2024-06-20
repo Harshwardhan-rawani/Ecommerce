@@ -1,43 +1,73 @@
 import React, { useEffect, useState } from 'react';
-import {  Mycontext } from './Mycontext';
+import { Mycontext } from './Mycontext';
 import axios from 'axios';
 
+const ProductProvider = ({ children }) => {
+  const [data, setData] = useState({
+    alldata: [],
+    mendata: [],
+    womendata: [],
+    shoesdata: [],
+    watchdata: [],
+    earphonedata: [],
+    laptopdata: [],
+    ubkart: [],
+    bestselling: [],
+    topdeal: [],
+  });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const Productprovider = ({children})=>{
-    const [data,setData]= useState([])
-    const [mens,setmens] =useState([])
-    const [shoes,setshoes] =useState([])
-    const [women,setwomen] =useState([])
-    const [watch,setwatch] =useState([])
-    const [earphone,setearphone] =useState([])
-    const [laptop,setlaptop] =useState([])
-    useEffect(()=>{
-        axios.get("https://dummyjson.com/products").then((res)=>{setData(res.data.products)})
-        axios.get("https://dummyjson.com/products/search?q=men").then((res)=>{setmens(res.data.products)})
-        axios.get("https://dummyjson.com/products/search?q=shoes").then((res)=>{setshoes(res.data.products)})
-        axios.get("https://dummyjson.com/products/search?q=women").then((res)=>{setwomen(res.data.products)})
-        axios.get("https://dummyjson.com/products/search?q=earphone").then((res)=>{setearphone(res.data.products)})
-        axios.get("https://dummyjson.com/products/search?q=watch").then((res)=>{setwatch(res.data.products)})
-        axios.get("https://dummyjson.com/products/search?q=laptop").then((res)=>{setlaptop(res.data.products)})
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [allProducts, menProducts, shoesProducts, womenProducts, earphoneProducts, watchProducts, laptopProducts] = await Promise.all([
+          axios.get("https://dummyjson.com/products"),
+          axios.get("https://dummyjson.com/products/search?q=men"),
+          axios.get("https://dummyjson.com/products/search?q=shoes"),
+          axios.get("https://dummyjson.com/products/search?q=women"),
+          axios.get("https://dummyjson.com/products/search?q=earphone"),
+          axios.get("https://dummyjson.com/products/search?q=watch"),
+          axios.get("https://dummyjson.com/products/search?q=laptop"),
+        ]);
 
-    },[])
- const objectdata ={ 
-    mendata : mens,
-    womendata : women,
-    shoesdata : shoes,
-    watchdata : watch, 
-    earphonedata:earphone,
-    laptopdata :laptop,
-    alldata : data,
-    ubkart: data.slice(0,9),
-    bestselling : data.slice(10,19),
-    topdeal : data.slice(20,29)
- }
- 
-    return (
-        <Mycontext.Provider value = {objectdata}>
-            {children}
-        </Mycontext.Provider>
-    );
+        const allData = allProducts.data.products;
+
+        setData({
+          alldata: allData,
+          mendata: menProducts.data.products,
+          womendata: womenProducts.data.products,
+          shoesdata: shoesProducts.data.products,
+          watchdata: watchProducts.data.products,
+          earphonedata: earphoneProducts.data.products,
+          laptopdata: laptopProducts.data.products,
+          ubkart: allData.slice(0, 9),
+          bestselling: allData.slice(10, 19),
+          topdeal: allData.slice(20, 29),
+        });
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading data: {error.message}</div>;
+  }
+
+  return (
+    <Mycontext.Provider value={data}>
+      {children}
+    </Mycontext.Provider>
+  );
 };
-export default Productprovider
+
+export default ProductProvider;
