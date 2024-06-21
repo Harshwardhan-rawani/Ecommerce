@@ -100,11 +100,11 @@ useEffect(() => {
       className='w-[90%]'
       >
         {props.Image.map((e)=>{
-               return   <SwiperSlide key={e.id} className=' m-1 bg-gray-200 shadow-md hover:border-2 border-gray-400  h-[30vh] relative lg:h-[22vw]'>
+               return   <SwiperSlide key={e.id} className=' m-1 bg-gray-200 shadow-md hover:border-2 border-gray-400  h-[35vh] relative lg:h-[22vw]'>
               
                 <Link to={`/feature/${e.id}`} className='hover:text-black w-full'>
                 <img src={`${e.thumbnail}`} className='xl:w-full object-contain w-52 mx-auto ' alt="" />
-                <div className=' m-2 lg:p-1 h-[5vh]'>
+                <div className=' m-2 lg:p-1 h-[10vh]'>
                   <p className='text-md lg:text-md font-mono text-sm'>{e.title}</p>
                   <p className='flex items-center text-md lg:text-md font-semibold'><FaRupeeSign/>{Math.ceil((80*e.price)-(Math.ceil(80*e.price*e.discountPercentage*0.01)))} </p>
                 </div>
