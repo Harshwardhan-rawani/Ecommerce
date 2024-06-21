@@ -18,21 +18,25 @@ async function saveUserData(userid, products) {
 const postwishlist = async (req, res) => {
     const data = req.body;
     const token = req.header('Authorization').replace("Bearer ", "");
-
     try {
         const decoded = jwt.verify(token, process.env.Jwt_token);
         let user = await model.findOne({ user_id: decoded.id });
 
         if (!user) {
             await saveUserData(decoded.id, data);
-        } else {
-            user.products.push(data);
-            await user.save();
-        }
+        } 
+        else {
+            const item = user.products.find(item=>item.p_id == data.p_id)
 
-        res.status(200).json({ message: "Successfully added" });
+            if(!item){
+                user.products.push(data);
+                await user.save();
+                return res.status(200).json({ message: "Successfully added" });
+            }
+            return res.status(200).json({ message: "Already added" });
+        }
     } catch (error) {
-        console.error('Error adding to wishlist:', error);
+        console.log("error")
         res.status(500).json({ message: "Failed to add to wishlist" });
     }
 };
@@ -51,6 +55,7 @@ const getwishlist = async (req, res) => {
 
 const deletewishlist = async (req, res) => {
     try {
+    
         const token = req.header('Authorization').replace("Bearer ", "");
         const decoded = jwt.verify(token, process.env.Jwt_token);
         const { id } = req.params;
@@ -58,6 +63,7 @@ const deletewishlist = async (req, res) => {
 
       if(user){
         user.products = user.products.filter(product => product.p_id !== id);
+        console.log(user.products)
         await user.save()
       }
      

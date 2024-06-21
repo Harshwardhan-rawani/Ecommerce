@@ -12,11 +12,76 @@ function Product() {
   const {token}=useContext(Authcontext)
   const dropdownRef = useRef(null);
   const [openclose,setopenclose]=useState(null)
-  const [heart,setheart]=useState([])
   const {id}=useParams()
    const [pro,setpro]=useState([])
-   const [wishlist,setwishlist]=useState(null)
+
    const [loading,setLoading]=useState(true)
+   const [heart,setheart]=useState([])
+  const [wishlist,setwishlist]=useState(null)
+
+  const deleteWishlist = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_URL}/wishlist/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Product removed from wishlist successfully');
+    } catch (error) {
+      console.error('Error removing product from wishlist:', error);
+    }
+  };
+
+  const handlelike=async(id,title,price,image)=>{
+    const product = {p_id:id,p_title:title,p_price:price,p_image:image}
+    if(!heart.find(item => item.p_id==id)){
+      setheart(prev => !prev.find(item => item.p_id == id)?[...prev,product]:prev)
+      setwishlist(product)
+    }
+  else{
+    console.log(heart.filter(item => Number(item.p_id) !==Number(id)))
+    setheart(heart.filter(item => Number(item.p_id) !== Number(id)))
+    deleteWishlist(id);
+  
+   
+  }
+ }
+ useEffect(() => {
+  const postData = async () => {
+    try {
+      if(wishlist){
+        const res = await axios.post(`${import.meta.env.VITE_URL}/wishlist`, wishlist, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(res.data.message);
+      }
+   
+    } catch (error) {
+      console.error('Error posting data:',error);
+    }
+  };
+
+  postData();
+}, [wishlist]); 
+useEffect(() => {
+  const getData = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_URL}/wishlist`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      setheart(res.data[0].products)
+    } catch (error) {
+      console.error('Error posting data:', error);
+    }
+  
+  };
+
+  getData();
+}, []);
    useEffect(()=>{
     const fetchProduct = async () => {
       try {
@@ -49,48 +114,7 @@ function Product() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
- const handlelike=async(id,title,price,image)=>{
-    setheart(prev => !prev.find(item => item.p_id == id)?[...prev,{p_id:id,p_title:title,p_price:price,p_image:image}]:prev)
-   setwishlist({p_id:id,p_title:title,p_price:price,p_image:image})
- }
- useEffect(() => {
-  const postData = async () => {
-    try {
-      if(wishlist){
-        const res = await axios.post(`${import.meta.env.VITE_URL}/wishlist`, wishlist, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        });
-        console.log(res.data.message);
-      }
-    } catch (error) {
-      console.error('Error posting data:', error);
-    }
-  };
-
-  postData();
-}, [wishlist]); 
-useEffect(() => {
-  const getData = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/wishlist`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      setheart(res.data[0].products)
-      setLoading(true)
-    } catch (error) {
-      console.error('Error posting data:', error);
-    }
-    finally{
-      setLoading(false)
-    }
-  };
-
-  getData();
-}, []);
+ 
 // console.log(heart.find(item =>item.p_id == 187))
 if (loading) {
   return  <div className='w-screen h-screen flex items-center justify-center'><div className="w-16 h-16 spinner-border" role="status">

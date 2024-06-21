@@ -32,11 +32,15 @@ function Likedlist() {
   }, []);
   const handledelete = async(id)=>{
       setheart(heart.filter(items=> items.p_id !==id))
-      await axios.delete(`${import.meta.env.VITE_URL}/wishlist/${id}`,{
-        headers:{
-          Authorization : `Bearer ${token}`
-        }
-      })
+      await new Promise( (reslove,reject)=>{
+        axios.delete(`${import.meta.env.VITE_URL}/wishlist/${id}`,{
+          headers:{
+            Authorization : `Bearer ${token}`
+          }
+        })
+        reslove(true)
+      }
+    )
   }
   if (loading) {
     return (

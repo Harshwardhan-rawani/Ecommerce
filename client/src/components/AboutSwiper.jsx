@@ -14,9 +14,33 @@ function AboutSwiper(props) {
   const {token} = useContext(Authcontext)
   const [heart,setheart]=useState([])
   const [wishlist,setwishlist]=useState(null)
+
+  const deleteWishlist = async (id) => {
+    try {
+      await axios.delete(`${import.meta.env.VITE_URL}/wishlist/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log('Product removed from wishlist successfully');
+    } catch (error) {
+      console.error('Error removing product from wishlist:', error);
+    }
+  };
+
   const handlelike=async(id,title,price,image)=>{
-    setheart(prev => !prev.find(item => item.p_id == id)?[...prev,{p_id:id,p_title:title,p_price:price,p_image:image}]:prev)
-   setwishlist({p_id:id,p_title:title,p_price:price,p_image:image})
+    const product = {p_id:id,p_title:title,p_price:price,p_image:image}
+    if(!heart.find(item => item.p_id==id)){
+      setheart(prev => !prev.find(item => item.p_id == id)?[...prev,product]:prev)
+      setwishlist(product)
+    }
+  else{
+    console.log(heart.filter(item => Number(item.p_id) !==Number(id)))
+    setheart(heart.filter(item => Number(item.p_id) !== Number(id)))
+    deleteWishlist(id);
+  
+   
+  }
  }
  useEffect(() => {
   const postData = async () => {
@@ -79,8 +103,8 @@ useEffect(() => {
                return   <SwiperSlide key={e.id} className=' m-1 bg-gray-200 shadow-md hover:border-2 border-gray-400  h-[30vh] relative lg:h-[22vw]'>
               
                 <Link to={`/feature/${e.id}`} className='hover:text-black w-full'>
-                <img src={`${e.thumbnail}`} className='lg:w-full w-4/5 mx-auto' alt="" />
-                <div className=' m-2 lg:p-1 absolute bottom-0'>
+                <img src={`${e.thumbnail}`} className='xl:w-full object-contain w-52 mx-auto ' alt="" />
+                <div className=' m-2 lg:p-1 h-[5vh]'>
                   <p className='text-md lg:text-md font-mono text-sm'>{e.title}</p>
                   <p className='flex items-center text-md lg:text-md font-semibold'><FaRupeeSign/>{Math.ceil((80*e.price)-(Math.ceil(80*e.price*e.discountPercentage*0.01)))} </p>
                 </div>
