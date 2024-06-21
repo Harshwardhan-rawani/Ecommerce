@@ -67,6 +67,7 @@ function Feature() {
 
   postData();
 }, [wishlist]); 
+
 useEffect(() => {
   const getData = async () => {
     try {
@@ -152,9 +153,7 @@ useEffect(() => {
         </div>
         <div className="col-start-2 col-end-5">
           <img src={`${image}`} alt="" className='h-[60vw] lg:h-[30vw]' />
-          <button className='absolute top-2 right-2 text-2xl' onClick={() => handleLike(data.id, data.title, Math.round(data.price * 80 - (data.price * 80 * data.discountPercentage * 0.01)), data.thumbnail)}>
-            {heart.find(item => item.p_id === data.id) ? <FaHeart /> : <CiHeart />}
-          </button>
+          <button className='absolute top-2 right-2 text-2xl' onClick={()=>{handleLike(data.id,data.title,Math.round((data.price*80)-((data.price*80)*data.discountPercentage*0.01)),data.thumbnail)}}>{heart.find(item=>item.p_id == data.id)?<FaHeart/>:<CiHeart/>}</button>
         </div>
       </div>
       {/* right */}
