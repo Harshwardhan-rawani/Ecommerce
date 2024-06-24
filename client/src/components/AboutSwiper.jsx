@@ -64,12 +64,15 @@ function AboutSwiper(props) {
 useEffect(() => {
   const getData = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_URL}/wishlist`, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-      setheart(res.data[0].products)
+      if(token){
+        const res = await axios.get(`${import.meta.env.VITE_URL}/wishlist`, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+        setheart(res.data[0].products)
+      }
+ 
     } catch (error) {
       console.error('Error posting data:', error);
     }
