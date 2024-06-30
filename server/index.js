@@ -7,7 +7,6 @@ const path = require("path")
 //connection
 const { createConnection }  = require("./connection")
 //routes
-const getapi_routes = require("./routes/getapidata.js")
 const Signuproute_router = require("./routes/signup.js")
 const items_router = require("./routes/items.js")
 const homedata_router = require("./routes/home.js")
@@ -37,5 +36,4 @@ app.use("/item",homedata_router)
 app.use("/admin",items_router)
 app.use("/wishlist",wishlist_routes)
 app.use("/cart",cartpost_routes)
-app.use("/",getapi_routes)
 app.listen(port,()=>{console.log(`server connect at localhost:${port}`)})

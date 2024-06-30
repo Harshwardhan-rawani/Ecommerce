@@ -1,11 +1,22 @@
-import React, { useContext} from 'react';
+import axios from 'axios';
+import React, { useContext, useEffect, useState} from 'react';
 
 import { Link } from 'react-router-dom';
-import { Mycontext } from '../context/Mycontext';
+
 
 function Items() {
 
- const {data,item}=useContext(Mycontext)
+  const [item,setItem]= useState(null);
+  const [loading ,setLoading]=useState(true)
+  useEffect(()=>{
+   const fetchdata = async()=>{
+    const res=await axios.get(`${import.meta.env.VITE_URL}/item/api`)
+    setItem(res.data)
+    setLoading(false)
+   }
+   fetchdata()
+  },[])
+if(loading) return <div>Loading</div>
   return (
 
     <div className='bg-[#ffffff] flex justify-around mt-[42px] p-2 overflow-scroll lg:overflow-hidden lg:mt-[25px] lg:flex lg:justify-center '>
