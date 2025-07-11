@@ -16,6 +16,7 @@ import Cart from './pages/Cart';
 import Product from './pages/Product';
 import Likedlist from './pages/Likedlist';
 import Forgot from './pages/Forgot'
+import Address from './pages/Address';
 function App() {
 
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route   path="/cart" element= {<><Top/><Cart/></>} />
           <Route   path="/wishlist" element= {<><Top/><Likedlist/></>} />
           <Route   path="/product/:id" element= {<><Top/><Product/></>} />
+          <Route   path="/address/" element= {<><Address/></>} />
 
 
         </Route>

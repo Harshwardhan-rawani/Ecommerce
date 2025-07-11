@@ -5,10 +5,13 @@ import { MdCurrencyRupee } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Authcontext } from '../context/Auth';
 import axios from 'axios';
+import { Ordercontext } from '../context/Ordercontext';
 
 
 function Likedlist() {
   const [heart,setheart]=useState([])
+  const {orderitemsfun,orderItem} = useContext(Ordercontext)
+  console.log(orderItem)
   const {storetoken,token}=useContext(Authcontext)
   const [loading,setLoading]=useState(true)
   useEffect(() => {

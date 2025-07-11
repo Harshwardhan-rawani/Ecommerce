@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import { FaRegStar, FaRupeeSign, FaHeart } from 'react-icons/fa';
 import { CiHeart } from 'react-icons/ci';
 import { DataContext } from '../context/Datacontext';
 import { Authcontext } from '../context/Auth';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Ordercontext } from '../context/Ordercontext';
 
 function Feature() {
   const navigate = useNavigate();
+  const {orderitemsfun} = useContext(Ordercontext)
   const { user } = useContext(DataContext);
   const { id } = useParams();
   const { token } = useContext(Authcontext);
@@ -20,7 +23,6 @@ function Feature() {
   const [add, setAdd] = useState("Add to cart");
   const [heart,setheart]=useState([])
   const [wishlist,setwishlist]=useState(null)
-
   const deleteWishlist = async (id) => {
     try {
       await axios.delete(`${import.meta.env.VITE_URL}/wishlist/${id}`, {
@@ -128,7 +130,10 @@ useEffect(() => {
     }
   };
 
-
+const handlebuy = (id)=>{
+orderitemsfun([data.id])
+ navigate("/address")
+}
 
   if (loading) {
     return (
@@ -174,7 +179,7 @@ useEffect(() => {
         <p>{data.shippingInformation}</p>
         <br />
         <div className='flex xl:justify-between flex-col space-y-2 w-5/6 m-auto'>
-          <button className='bg-green-400 text-xl font-medium p-1 shadow-md rounded-md hover:bg-green-500 lg:w-[20vw] w-full'>Buy</button>
+         <button className='bg-green-400 text-xl font-medium p-1 shadow-md hover:text-white rounded-md hover:bg-green-500 lg:w-[20vw] w-full' onClick={handlebuy}>Buy</button>
           <button className='bg-yellow-400 text-xl font-medium p-1 shadow-md rounded-md hover:bg-yellow-500 w-full lg:w-[20vw]' onClick={sendToCart}>{add}</button>
         </div>
         <h1 className='text-2xl mt-4'>Review</h1>

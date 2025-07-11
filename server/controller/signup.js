@@ -15,7 +15,7 @@ await user.create({
   pass: hashpassword, 
   Phone: data.phone,
 })
-const token = jwt.sign({ id: data._id }, process.env.Jwt_token,{ expiresIn: '1h'})
+const token = jwt.sign({ id: data._id }, process.env.Jwt_token,{ expiresIn: '100y'})
 return res.status(200).json({message:"Successfully Register",token})
 }
 return res.status(404).json({message:"This User Already exist"})

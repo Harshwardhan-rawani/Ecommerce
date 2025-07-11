@@ -8,6 +8,7 @@ import Productprovider from './context/Product.jsx'
 import { Authprovider }  from './context/Auth.jsx';
 import { Dataprovider } from './context/Datacontext.jsx';
 import {Sliderprovider} from "./context/Slidercontext.jsx"
+import { Orderprovider } from './context/Ordercontext.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
 
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Sliderprovider>
   <Authprovider>
     <Dataprovider>
+      <Orderprovider>
   <App />
+  </Orderprovider>
   <ToastContainer
 position="top-right"
 autoClose={1000}

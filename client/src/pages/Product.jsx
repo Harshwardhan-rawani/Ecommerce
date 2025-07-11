@@ -133,7 +133,7 @@ if (loading) {
 <div className={`xl:w-full border-t-2 xl:border-gray-300 border-gray-400 xl:h-[80vh]  xl:block ${openclose?"bg-[#ffffffc8] text-black w-full absolute top-10 z-30 p-3":"hidden"} `}   ref={dropdownRef}>
  <div className='xl:p-2 font-bold '>
   <div className='xl:block hidden xl:text-center xl:text-xl lg:text-lg text-md '>{id}</div>
-  <div>hello</div>
+  <div></div>
  </div>
 </div>
 </div>

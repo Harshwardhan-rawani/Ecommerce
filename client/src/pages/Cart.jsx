@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdCurrencyRupee } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FaHome } from "react-icons/fa";
 import axios from 'axios';
 import { DataContext } from '../context/Datacontext';
 import { Authcontext } from '../context/Auth';
+import { Ordercontext } from '../context/Ordercontext';
 
 function Cart() {
+  const navigate = useNavigate()
+  const {orderitemsfun} = useContext(Ordercontext)
   const { token } = useContext(Authcontext);
   const { user } = useContext(DataContext);
   const [loading, setLoading] = useState(true);
@@ -35,6 +38,16 @@ function Cart() {
       fetchData();
     }
   }, [user, token]);
+  const handleorder = ()=>{
+    const array=[]
+   data.map((item)=>{
+    array.push(Number(item.product_id))
+   })
+  orderitemsfun(array)
+    navigate("/address")
+
+  }
+
 
   const deleteData = async (id) => {
     try {
@@ -104,6 +117,7 @@ function Cart() {
           <div className="lg:w-1/3 lg:static lg:block fixed bottom-0 lg:bg-transparent bg-gray-300 w-screen p-4">
             <div className='font-semibold text-lg'>Total</div>
             <div className='font-bold flex items-center text-xl text-red-800'> <MdCurrencyRupee />{totalPrice}</div>
+            <button className='bg-green-500 text-white font-bold px-3 mt-2 z-50 hover:bg-green-600' onClick={handleorder}>Buy</button>
           </div>
           <div className="lg:w-3/4 w-[90%] p-2 mx-auto z-30">
             {data.map((e, index) => (

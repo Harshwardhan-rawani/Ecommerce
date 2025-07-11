@@ -17,30 +17,36 @@ async function saveUserData(userid, products) {
 }
 
 
-const postcart = async(req,res)=>{
-try {
-  const token = req.header('Authorization').replace("Bearer ","");
-  const decoded = jwt.verify(token,process.env.Jwt_token)
-  const products= req.body
- 
-  const user = await cart.findOne({user_id : decoded.id})
-  if (!user) {
-    await saveUserData(decoded.id, products);
-    res.status(200).json({message:"sucess"})
-} 
-else {
-    user.products.push(products);
-    await user.save();
-    res.status(200).json({message:"sucess"})
-}
-  
-}
- catch (error) {
-  console.log("error in cartpost")
-  res.status(200).json({message:"Fail on post on cart"})
-}  
+const postcart = async (req, res) => {
+  try {
+    const token = req.header('Authorization').replace("Bearer ", "");
+    const decoded = jwt.verify(token, process.env.Jwt_token);
+    const products = req.body;
 
-}
+    const user = await cart.findOne({ user_id: decoded.id });
+
+    if (!user) {
+      await saveUserData(decoded.id, products);
+      res.status(201).json({ message: "success" });
+    } else {
+      const existingProduct = user.products.find(product => product.product_id === products.product_id);
+
+      if (existingProduct) {
+        return res.status(400).json({ message: "Product already in cart" });
+      }
+
+      user.products.push(products);
+      await user.save();
+
+      res.status(200).json({ message: "success" });
+    }
+
+  } catch (error) {
+    console.error("Error in cart post:", error);
+    res.status(500).json({ message: "Failed to post to cart", error: error.message });
+  }
+};
+
 const getcart=async(req,res)=>{
   try {
     const token = req.header('Authorization').replace("Bearer ","");
